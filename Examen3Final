@@ -1,0 +1,42 @@
+public class Main {
+    public static void main(String[] args) {
+        CuentaBancaria[] cuentas = new CuentaBancaria[3];
+        cuentas[0] = new CuentaBancaria(1000.0, "C001");
+        cuentas[1] = new CuentaBancaria(2000.0, "C002");
+        cuentas[2] = new CuentaBancaria(1500.0, "C003");
+
+        CuentaBancaria cuentaMasAlta = CuentaBancaria.obtenerCuentaConSaldoMasAlto(cuentas);
+        System.out.println("Cuenta con el saldo más alto: " + cuentaMasAlta.getNumeroCuenta());
+    }
+}
+public class CuentaBancaria {
+    private double saldo;
+    private String numeroCuenta;
+
+    public CuentaBancaria(double saldo, String numeroCuenta) {
+        this.saldo = saldo;
+        this.numeroCuenta = numeroCuenta;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public String getNumeroCuenta() {
+        return numeroCuenta;
+    }
+
+    public static CuentaBancaria obtenerCuentaConSaldoMasAlto(CuentaBancaria[] cuentas) {
+        CuentaBancaria cuentaMasAlta = null;
+        double saldoMasAlto = Double.MIN_VALUE;
+
+        for (CuentaBancaria cuenta : cuentas) {
+            if (cuenta.getSaldo() > saldoMasAlto) {
+                saldoMasAlto = cuenta.getSaldo();
+                cuentaMasAlta = cuenta;
+            }
+        }
+
+        return cuentaMasAlta;
+    }
+}
